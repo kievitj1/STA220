@@ -1,0 +1,13 @@
+corridor,year,months_counted,bikes_per_day,cars_per_day,crashes,serious_crashes
+College Avenue,2023,12,414,9030,6,1
+College Avenue,2024,12,492,9070,5,0
+College Avenue,2025,12,559,9060,6,0
+Market Street,2023,12,176,14440,19,1
+Market Street,2024,12,178,14540,21,4
+Market Street,2025,12,187,14510,14,0
+Ridge Road,2023,12,35,6820,15,8
+Ridge Road,2024,12,36,6840,7,1
+Ridge Road,2025,12,35,6840,11,8
+Station Road,2023,0,NA,7410,1,0
+Station Road,2024,12,131,7430,2,0
+Station Road,2025,12,185,7420,4,2

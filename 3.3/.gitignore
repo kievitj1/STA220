@@ -1,0 +1,6 @@
+# the practice output; the figures in output/figures/ are rebuilt by master.R
+output/house_margin.png
+.Rhistory
+.RData
+.Rproj.user/
+Rplots.pdf
