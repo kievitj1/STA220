@@ -124,3 +124,41 @@ summary(bike_crashes)
 
 
 # Your Figure ------------------------------------------------------------------------------------
+# Step 1: how many vehicles drive each section in the rush hours (7 and 8 a.m.; 4, 5, and 6 p.m.)
+bikes_crashes_yearly <- bike_yearly |>
+  group_by(corridor) |>
+  summarize(crashes_per_year = mean(crashes))
+
+
+# Step 3: put the problem next to the price. Minutes / 60 = hours, x 250 weekdays in a year.
+value <- bike_corridors |>
+  st_drop_geometry() |>
+  select(corridor, cost_million) |>
+  left_join(bikes_crashes_yearly, by = "corridor") |>
+  mutate(
+    bike_crashes_yearly_per_million = crashes_per_year / cost_million)
+
+# Expect 4 rows, one per section
+value
+
+mine <- value |>
+  filter(corridor == my_corridor)
+
+
+
+fig_12 <- ggplot(value, aes(x = hours_per_million, y = fct_reorder(section, hours_per_million))) +
+  geom_col(fill = "grey75") +
+  geom_col(data = mine, fill = "#eda100") +
+  scale_x_continuous(labels = scales::comma) +
+  labs(
+    title = "Birch Straightaway takes on the most rush-hour delay per dollar",
+    subtitle = "Hours lost to rush hour in a year, for each $1 million it would cost to add a lane",
+    x = "Hours of delay per $1 million",
+    y = NULL,
+    caption = "Hours lost = vehicles in the five rush hours x minutes of delay / 60 x 250 weekdays.\nMade-up data for practice. Pine County does not exist."
+  ) +
+  theme_minimal()
+
+fig_12
+
+ggsave("output/figures/example_12_value.png", fig_12, width = 7, height = 4.5, bg = "white")
